@@ -1,3 +1,5 @@
+"use client"
+
 import { Constellation } from "@/components/custom/constellation"
 
 export default function Landing() {
@@ -45,8 +47,23 @@ export default function Landing() {
         [8,9],
         [8,10],
       ]}
+      animations={[
+        [-1,0],
+        [-1,1],
+        [0,2],
+        [1,3],
+        [2,4],
+        [3,5],
+        [4,6],
+        [5,7],
+        [4,8],
+        [5,9],
+        [8,10],
+        [9,11],
+      ]}
       width={500}
       height={500}
+      speed={0.2}
     />
   </div>
   </>
