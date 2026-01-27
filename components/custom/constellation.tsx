@@ -212,7 +212,7 @@ export function Constellation({
   animations,
   width = 300,
   height = 300,
-  pointRadius = 3,
+  pointRadius = 4,
   speed = 0.2, // px/ms
 }: ConstellationProps) {
   const [lineStates, setLineStates] = React.useState<("idle" | "animating" | "done")[]>(
@@ -288,39 +288,56 @@ export function Constellation({
 
   return (
     <svg
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
-      fill="none"
-    >
-      {lines.map(([from, to], i) => {
-        const state = lineStates[i]
-        if (state === "idle") return null
-        const t = state === "done" ? 1 : progress[i]
-        const [x1, y1] = points[from]
-        const [x2, y2] = points[to]
-        return (
-          <line
-            key={i}
-            x1={x1}
-            y1={y1}
-            x2={x1 + (x2 - x1) * t}
-            y2={y1 + (y2 - y1) * t}
-            stroke="currentColor"
-            strokeWidth={1}
-          />
-        )
-      })}
+  width={width}
+  height={height}
+  viewBox={`0 0 ${width} ${height}`}
+  fill="none"
+>
+  {/* Definisi filter glow */}
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
 
-      {points.map(([x, y], i) => (
-        <circle
-          key={i}
-          cx={x}
-          cy={y}
-          r={pointRadius}
-          fill="currentColor"
-        />
-      ))}
-    </svg>
+  {/* Lines */}
+  {lines.map(([from, to], i) => {
+    const state = lineStates[i];
+    if (state === "idle") return null;
+    const t = state === "done" ? 1 : progress[i];
+    const [x1, y1] = points[from];
+    const [x2, y2] = points[to];
+    return (
+      <line
+        key={i}
+        x1={x1}
+        y1={y1}
+        x2={x1 + (x2 - x1) * t}
+        y2={y1 + (y2 - y1) * t}
+        stroke="#94eaffff"   // putih kebiruan
+        strokeWidth={2}
+        filter="url(#glow)" // tambahkan glow
+        className="opacity-40"
+      />
+    );
+  })}
+
+  {/* Circles */}
+  {points.map(([x, y], i) => (
+    <circle
+      key={i}
+      cx={x}
+      cy={y}
+      r={pointRadius}
+      fill="#94eaffff"   // putih kebiruan
+      filter="url(#glow)" // tambahkan glow
+      className="opacity-40 blur-[1px]"
+    />
+  ))}
+</svg>
   )
 }
