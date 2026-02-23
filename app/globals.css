@@ -85,6 +85,19 @@
   font-family: 'poppins', sans-serif;
 }
 
+p {
+  color: #ffffff;
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.4),
+    0 0 10px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.un {
+  color: #c5c5c5;
+  text-shadow: none;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

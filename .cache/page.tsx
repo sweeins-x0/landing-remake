@@ -1,76 +1,89 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Constellation } from "@/components/custom/constellation"
-import Ganesh from "@/public/ganesh.svg"
+
+import { Constellation, ConstellationDefinition } from "@/components/custom/constellation"
+import { Moon, MoonDefinition } from "@/components/custom/moon"
+
+import { Topbar } from "@/components/smansa/topbar"
+import { LeftConstellation } from "@/components/smansa/left-constellation"
+import { CenterConstellation } from "@/components/smansa/center-constellation"
+import { RightConstellation } from "@/components/smansa/right-constellation"
 
 export default function Landing() {
   const [visible, setVisible] = useState(false)
   useEffect(() => {
-    setVisible(true)
+    setTimeout(() => setVisible(true), 2000)
   }, [])
   return <>
-  <div className="w-full bg-[#020712]">
-    <div className="w-full h-screen flex items-center justify-center">
-      <div className="w-full h-screen absolute flex items-center justify-center">
-        <div className="w-[500px] h-[500px] relative right-[500px]">
-          <Constellation points={[[100, 100], [170, 160], [180, 190]]} lines={[[0,1], [1,2]]} animations={[[-1,0], [-1,1]]}/>
-          <Constellation points={[[150, 120], [100, 50], [10, 100]]} lines={[[0,1], [1,2]]} animations={[[-1,0], [-1,1]]}/>
-        </div>
-        {/* <div className={`absolute left-[-15rem] w-[30rem] h-[30rem] rounded-full bg-white blur-[100rem] transition-opacity delay-2800 duration-700 ${visible ? "opacity-[0.05]" : "opacity-0"}`}></div> */}
-        {/* <div className={`absolute right-[-15rem] w-[30rem] h-[30rem] rounded-full bg-white blur-[100rem] transition-opacity delay-2800 duration-700 ${visible ? "opacity-[0.05]" : "opacity-0"}`}></div> */}
-        <div className={`absolute w-[60rem] h-[60rem] rounded-full bg-white blur-[100rem] transition-opacity delay-2800 duration-700 ${visible ? "opacity-[0.05]" : "opacity-0"}`}></div>
+  <ConstellationDefinition />
+  <MoonDefinition />
+  <div className="w-full h-full bg-[#020712] overflow-x-hidden relative">
+    <div className="relative flex flex-col w-full h-screen">
+      <Moon className="absolute -bottom-[5rem]" visible={visible} />
+      <Topbar visible={visible} />
+      <div className="flex flex-row items-center justify-center w-full h-full">
+        <LeftConstellation visible={visible} />
+        <CenterConstellation visible={visible} />
+        <RightConstellation visible={visible} />
       </div>
-      <div className="w-[300px] h-[500px]">
-        <Ganesh fill="#BBE0EF" width={500} height={500} className={`absolute transition-opacity delay-2800 duration-700 ${visible ? "opacity-50" : "opacity-0"}`} />
-        <Constellation
-          points={[
-            [250, 80],
-            [200, 140],
-            [300, 140],
-            [250, 250],
-            [150, 320],
-            [350, 320],
-            [120, 250],
-            [380, 250],
-            [250, 380],
-            [150, 400],
-            [350, 400],
-          ]}
-          lines={[
-            [0,1],
-            [0,2],
-            [1,3],
-            [2,3],
-            [3,4],
-            [3,5],
-            [4,6],
-            [5,7],
-            [4,8],
-            [5,8],
-            [8,9],
-            [8,10],
-          ]}
-          animations={[
-            [-1,0],
-            [-1,1],
-            [0,2],
-            [1,3],
-            [2,4],
-            [3,5],
-            [4,6],
-            [5,7],
-            [4,8],
-            [5,9],
-            [8,10],
-            [9,11],
-          ]}
-          width={500}
-          height={500}
-          speed={0.2}
-        />
+      <div className={`absolute -bottom-[10rem] flex flex-col gap-y-10 w-full items-center transition-opacity ease-in-out duration-1000 ${visible ? "opacity-70" : "opacity-0"}`}>
+        <div className={`flex flex-row gap-x-[10rem] justify-center w-full h-[10rem]`}>
+          <div className="flex flex-col h-full justify-center">
+            <p className="text-glow-neon"> Dengan siswa </p>
+            <p className="text-4xl text-white"> 1200+ </p>
+            <p className="text-white">siswa</p>
+          </div>
+          <div className="flex flex-col h-full justify-center">
+            <p className="text-white"> Dengan kelas </p>
+            <p className="text-4xl text-white"> 36 </p>
+            <p className="text-white">kelas</p>
+          </div>
+          <div className="flex flex-col h-full justify-center">
+            <p className="text-white"> Dengan ekstrakurikuler </p>
+            <p className="text-4xl text-white"> 24 </p>
+            <p className="text-white">ekstrakurikuler</p>
+          </div>
+        </div>
+        <p className="text-white">SMA N 1 Purbalingga Profile</p>
       </div>
     </div>
+    <div className={`relative flex items-center justify-center w-full h-screen ${visible ? "flex" : "hidden"}`}>
+      <div className="flex flex-row justify-center">
+    		<div className={`absolute w-[10rem] h-[10rem] bg-white rounded-full blur-[10rem] transition-opacity ease-in-out duration-1000 ${visible ? "opacity-[0.7]" : "opacity-0"}`}></div>
+        <RightConstellation visible={visible} />
+        <div className="relative bottom-10 flex flex-col items-center w-1/4 justify-center gap-y-20">
+          <p className="text-5xl text-gray-300 text-shadow-[0_0_10px_rgba(255,255,255,0.8)]"> Ayo menjelajah! </p>
+          <div className="flex flex-col items-center justify-center gap-y-10">
+            <p className="text-center text-gray-300 text-shadow-[0_0_10px_rgba(255,255,255,0.8)]"> SMA N 1 Purbalingga diharapkan dapat menjadi wadah siswa untuk mengembangkan kemampuan secara holistik. Sudah tahu? langsung bergabung! </p>
+            <a href="">
+              <div className="px-10 py-2 rounded-full bg-[#020712]">
+                <p className="text-gray-300 text-shadow-[0_0_10px_rgba(255,255,255,0.8)]"> Gabung Sekarang </p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <LeftConstellation visible={visible} />
+      </div>
+      <div className="absolute bottom-0 flex flex-col gap-y-10 items-center">
+        <p className="text-sm text-gray-400 text-shadow-[0_0_10px_rgba(255,255,255,0.8)]"> Dipercaya oleh </p>
+        <div className="flex flex-row h-32 bg-black"></div>
+      </div>
+    </div>
+    <div className={`w-full min-h-screen bg-[#020712] z-1 ${visible ? "flex" : ""}`}>
+      <div className="flex flex-row w-full p-20">
+        <div className="absolute w-1/5">
+          <p className="text-black"> Visi Sekolah </p>
+        </div>
+        <div className="w-4/5">
+
+        </div>
+      </div>
+    </div>
+    {/* <div className={`w-full h-screen ${visible ? "flex" : "hidden"}`}> */}
+    {/* </div> */}
+    {/* <div className={`flex flex-row w-full h-screen ${visible ? "flex" : "hidden"}`}> */}
+    {/* </div> */}
   </div>
   </>
 }

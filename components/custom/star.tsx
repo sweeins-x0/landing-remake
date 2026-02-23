@@ -8,10 +8,10 @@ export function Star(properties: any) {
 		<div className="absolute w-[2rem] h-[2rem] rounded-full bg-white blur-[1rem] opacity-50 pointer-events-none"></div>
 		<svg className="absolute w-[15px] h-[15px] pointer-events-none">
 			<rect
-					width="100%"
-					height="100%"
-					fill="white"
-					clipPath="url(#star)"
+				width="100%"
+				height="100%"
+				fill="white"
+				clipPath="url(#star)"
 				/>
 		</svg>
 	</div>
